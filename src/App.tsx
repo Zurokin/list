@@ -8,8 +8,12 @@ interface User {
 interface UserDetails {
   id: number;
   name: string;
-  email: string;
-  phone: string;
+  avatar: string;
+  details: {
+    city: string;
+    company: string;
+    position: string;
+  };
 }
 
 interface DetailsProps {
@@ -85,10 +89,29 @@ const Details: React.FC<DetailsProps> = ({ info }) => {
   if (!details) return null;
 
   return (
-    <div style={{ padding: 10, border: "1px solid #ccc", marginLeft: 20 }}>
+    <div
+      style={{
+        padding: 10,
+        border: "1px solid #ccc",
+        marginLeft: 20,
+        minWidth: 200,
+      }}
+    >
+      <img
+        src={details.avatar}
+        alt={details.name}
+        style={{
+          width: 100,
+          height: 100,
+          borderRadius: "50%",
+          objectFit: "cover",
+          marginBottom: 10,
+        }}
+      />
       <h3>{details.name}</h3>
-      <p>Email: {details.email}</p>
-      <p>Телефон: {details.phone}</p>
+      <p>City: {details.details.city}</p>
+      <p>Company: {details.details.company}</p>
+      <p>Position: {details.details.position}</p>
     </div>
   );
 };
